@@ -1,0 +1,24 @@
+- name: create directories
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: true
+  with_items:
+    - "{{ data_directory }}"
+    - "{{ tests_directory }}"
+    - "{{ generated_data }}"
+    - "{{ success_data }}"
+    - "{{ problem_data }}"
+
+- name: copy load_testing_python_scripts
+  become: true
+  copy:
+    src: "load_testing_python_scripts"
+    dest: "{{ tests_directory }}"
+
+- name: create timescale config file
+  become: true
+  template:
+    src: "config_manual_data_injection_to_timescale.j2"
+    dest: "{{ tests_directory }}/load_testing_python_scripts/manual_data_injection_in_timescale/config.conf"

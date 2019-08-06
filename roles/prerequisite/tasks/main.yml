@@ -1,0 +1,85 @@
+---
+
+- name: update distribution
+  become: true
+  yum: name=* state=latest
+
+
+- name: install yum-utils
+  become: true
+  yum:
+    name: yum-utils
+
+- name: groupinstall development
+  become: true
+  yum:
+    name: "@development"
+
+- name: install IUS release
+  become: true
+  yum:
+    name: https://centos7.iuscommunity.org/ius-release.rpm
+
+- name: install python 3.6
+  become: true
+  yum:
+    name: python36u
+
+- name: install python 3.6 pip
+  become: true
+  yum:
+    name: python36u-pip
+
+- name: install pandas using pip3.6 environment
+  become: true
+  pip:
+    name: pandas==0.23.4
+    executable: pip3.6
+
+- name: install numpy using pip3.6 environment
+  become: true
+  pip:
+    name: numpy==1.15.2
+    executable: pip3.6
+
+- name: install influxdb client using pip3.6 environment
+  become: true
+  pip:
+    name: influxdb==5.2.0
+    executable: pip3.6
+
+- name: install psycopg2
+  become: true
+  pip:
+    name: psycopg2-binary
+    executable: pip3.6
+
+- name: install sqlalchemy
+  become: true
+  pip:
+    name: sqlalchemy
+    executable: pip3.6
+
+- name: add db."domain" to hosts file
+  become: true
+  lineinfile:
+    path: /etc/hosts
+    line: '127.0.0.1  db.{{ domain }}'
+    create: yes
+  when: is_prod == false
+
+- name: add postgres."domain" to hosts file
+  become: true
+  lineinfile:
+    path: /etc/hosts
+    line: '127.0.0.1  postgres.{{ domain }}'
+    create: yes
+  when: is_prod == false
+
+- name: add timescaledb."domain" to hosts file
+  become: true
+  lineinfile:
+    path: /etc/hosts
+    line: '127.0.0.1  timescaledb.{{ domain }}'
+    create: yes
+  when: is_prod == false

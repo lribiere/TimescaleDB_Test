@@ -1,0 +1,11 @@
+[Paths]
+success_files_directory: /opt/docker-data/data/success/
+failed_files_directory: /opt/docker-data/data/problem/
+
+[Timescale Client]
+host = timescaledb.{{ domain }}
+dbname = physio_signals
+db_conn = postgres
+user = postgres
+password = postgres
+port = 5432

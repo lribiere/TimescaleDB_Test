@@ -1,0 +1,8 @@
+---
+
+all:
+  hosts:
+    18.224.52.143:
+      ansible_ssh_user: centos
+      is_prod: false
+      domain: "aura.healthcare.local.aws.timescale"

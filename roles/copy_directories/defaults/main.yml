@@ -1,0 +1,9 @@
+data_directory: "/opt/docker-data/data"
+
+generated_data: "{{ data_directory }}/aura_generated_data"
+
+success_data: "{{ data_directory }}/success"
+
+problem_data: "{{ data_directory }}/problem"
+
+tests_directory: "/opt/docker-data/tests"
