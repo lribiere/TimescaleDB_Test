@@ -6,5 +6,3 @@
       tags: prerequisite
     - role: copy_directories
       tags: copy_directories
-    - role: copy_scripts
-      tags: copy_scripts
