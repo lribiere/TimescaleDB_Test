@@ -9,12 +9,6 @@ import numpy as np
 import logging
 
 
-# JSON field values
-TYPE_PARAM_NAME = "type"
-USER_PARAM_NAME = "user"
-DEVICE_PARAM_NAME = "device_address"
-
-
 def change_timestamp(unused_1, unused_2):
     '''sec and what is unused.'''
     change_timestamp_time = datetime.datetime.now()
@@ -131,11 +125,11 @@ def convert_rri_json_to_df(rri_json) -> pd.DataFrame:
     # Extract values to write to InfluxDB
     extracted_data_from_json_file = list(map(lambda x: x.split(" "), rri_json["data"]))
 
-    columns = ["timestamp", "RrInterval"]
-    df_to_write = pd.DataFrame(extracted_data_from_json_file, columns=columns).set_index("timestamp")
+    columns = ['timestamp', 'RrInterval']
+    df_to_write = pd.DataFrame(extracted_data_from_json_file, columns=columns).set_index('timestamp')
 
     # Convert string to numeric values
-    df_to_write["RrInterval"] = df_to_write["RrInterval"].apply(pd.to_numeric)
+    df_to_write['RrInterval'] = df_to_write['RrInterval'].apply(pd.to_numeric)
     # Convert index to datetime index
     df_to_write.index = pd.to_datetime(df_to_write.index)
     return df_to_write
@@ -158,7 +152,7 @@ def concat_rrinterval_files_into_single_dataframe(files_list: list) -> pd.DataFr
             json_data = json.load(json_file)
 
         # Get tags from file
-        measurement = json_data[TYPE_PARAM_NAME]
+        measurement = json_data['type']
 
         # Extract data and create dataframe from JSON file
         if measurement == "RrInterval":
@@ -180,7 +174,7 @@ def create_corrected_timestamp_list(concatenated_rr_interval_dataframe: pd.DataF
     ---------
     corrected_timestamp_list - Corrected timestamp generated
     """
-    rri_list = concatenated_rr_interval_dataframe["RrInterval"].values
+    rri_list = concatenated_rr_interval_dataframe['RrInterval'].values
     polar_index = concatenated_rr_interval_dataframe.index
 
     current_timestamp = polar_index[0]
@@ -230,7 +224,7 @@ def rri_files_write_pipeline(patient_measurement_subdirectories: str, id_patient
 
     with open(rr_files[0]) as json_file:
         json_data = json.load(json_file)
-    device_address = json_data["device_address"]
+    device_address = json_data['device_address']
 
     t1 = datetime.datetime.now()
     inject_device_address_into_device_table(device_address, cur, my_connection)
@@ -260,6 +254,7 @@ def rri_files_write_pipeline(patient_measurement_subdirectories: str, id_patient
         for file in rr_files:
             shutil.move(src=file, dst=path_for_problem_files + file.split("/")[-1])
 
+
 def convert_acm_json_to_df(acm_json: dict) -> pd.DataFrame:
     """
     Function converting accelerometer JSON data to pandas Dataframe.
@@ -273,11 +268,11 @@ def convert_acm_json_to_df(acm_json: dict) -> pd.DataFrame:
     # Extract values to write to InfluxDB
     extracted_data_from_json_file = list(map(lambda x: x.split(" "), acm_json["data"]))
 
-    columns = ["timestamp", "x_acm", "y_acm", "z_acm", "sensibility"]
-    df_to_write = pd.DataFrame(extracted_data_from_json_file, columns=columns).set_index("timestamp")
+    columns = ['timestamp', 'x_acm', 'y_acm', 'z_acm', 'sensibility']
+    df_to_write = pd.DataFrame(extracted_data_from_json_file, columns=columns).set_index('timestamp')
 
     # Convert string to numeric values
-    df_to_write[["x_acm", "y_acm", "z_acm"]] = df_to_write[["x_acm", "y_acm", "z_acm"]].apply(pd.to_numeric)
+    df_to_write[['x_acm', 'y_acm', 'z_acm']] = df_to_write[['x_acm', 'y_acm', 'z_acm']].apply(pd.to_numeric)
     # Convert index to datetime index
     df_to_write.index = pd.to_datetime(df_to_write.index)
     return df_to_write
@@ -296,11 +291,11 @@ def convert_gyro_json_to_df(gyro_json) -> pd.DataFrame:
     # Extract values to write to InfluxDB
     extracted_data_from_json_file = list(map(lambda x: x.split(" "), gyro_json["data"]))
 
-    columns = ["timestamp", "x_gyro", "y_gyro", "z_gyro"]
-    df_to_write = pd.DataFrame(extracted_data_from_json_file, columns=columns).set_index("timestamp")
+    columns = ['timestamp', 'x_gyro', 'y_gyro', 'z_gyro']
+    df_to_write = pd.DataFrame(extracted_data_from_json_file, columns=columns).set_index('timestamp')
 
     # Convert string to numeric values
-    df_to_write[["x_gyro", "y_gyro", "z_gyro"]] = df_to_write[["x_gyro", "y_gyro", "z_gyro"]].apply(pd.to_numeric)
+    df_to_write[['x_gyro', 'y_gyro', 'z_gyro']] = df_to_write[['x_gyro', 'y_gyro', 'z_gyro']].apply(pd.to_numeric)
     # Convert index to datetime index
     df_to_write.index = pd.to_datetime(df_to_write.index)
     return df_to_write

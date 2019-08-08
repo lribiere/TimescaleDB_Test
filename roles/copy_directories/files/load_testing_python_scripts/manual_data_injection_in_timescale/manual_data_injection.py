@@ -3,9 +3,6 @@ import connect_to_timescaledb as ctt
 import set_and_reorganize_directories as set_directories
 import aura_table as create_tables
 import library as l
-import glob
-import shutil
-import os
 import datetime
 
 
