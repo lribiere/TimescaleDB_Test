@@ -1,0 +1,7 @@
+---
+
+all:
+  hosts:
+    nad_ec2:
+      ansible_ssh_user: centos
+      domain: "timescale.aws.aura.healthcare"

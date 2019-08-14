@@ -1,7 +1,0 @@
----
-
-all:
-  hosts:
-    aura_preprod:
-      is_prod: true
-      domain: "preprod.aura.healthcare"

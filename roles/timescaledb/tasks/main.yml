@@ -1,0 +1,13 @@
+---
+
+- name: create timescale local directories
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: true
+  with_items:
+    - "{{ timescale_root_location }}"
+    - "{{ timescale_data_location }}"
+
+- include_tasks: run_container.yml

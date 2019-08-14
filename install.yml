@@ -4,5 +4,7 @@
   roles:
     - role: prerequisite
       tags: prerequisite
-    - role: copy_directories
-      tags: copy_directories
+    - role: timescaledb
+      tags: timescaledb
+    - role: copy_python_scripts
+      tags: copy_python_scripts

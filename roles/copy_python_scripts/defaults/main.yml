@@ -1,0 +1,9 @@
+data_directory: "/home/data"
+
+generated_data: "{{ data_directory }}/aura_generated_data"
+
+success_data: "{{ data_directory }}/success"
+
+problem_data: "{{ data_directory }}/failure"
+
+tests_directory: "/home/tests"

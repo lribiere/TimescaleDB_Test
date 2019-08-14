@@ -1,0 +1,12 @@
+---
+
+timescale_container_name: "timescaledb"
+
+timescale_root_location: "/opt/docker-data/{{ timescale_container_name }}"
+timescale_data_location: "{{ timescale_root_location }}/data"
+
+#timescale_docker_networks: "{{ aura_docker_network }}"
+timescale_docker_networks:
+  - name: "skynet"
+
+timescale_container_restart_policy: "always"

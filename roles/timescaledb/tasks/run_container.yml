@@ -1,0 +1,23 @@
+---
+
+- meta: flush_handlers
+
+- name: create a network
+  become: true
+  docker_network:
+    name: "{{ item.name }}"
+  with_items: "{{ timescale_docker_networks }}"
+
+- name: start or restart timescale container
+  become: true
+  docker_container:
+    name: "{{ timescale_container_name }}"
+    image: timescale/timescaledb:latest-pg11
+    state: "{{ timescale_docker_state | default('started') }}"
+    restart: "{{ timescale_docker_restart | default(false) | bool }}"
+    networks: "{{ timescale_docker_networks }}"
+    restart_policy: "{{ timescale_container_restart_policy }}"
+    ports:
+      - "5432:5432"
+    volumes:
+      - "{{ timescale_data_location }}:/var/lib/postgresql/data:rw"
