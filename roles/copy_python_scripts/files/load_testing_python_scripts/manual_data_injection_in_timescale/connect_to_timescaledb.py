@@ -7,7 +7,7 @@ def connect_to_timescaledb_postgres_db():
     ####### VIRER CREATION PHYSIO_SIGNALS QUAND TESTS TERMINES #######
 
     config = configparser.ConfigParser()
-    config.read('/opt/docker-data/tests/load_testing_python_scripts/manual_data_injection_in_timescale/config.conf')
+    config.read('/home/tests/load_testing_python_scripts/manual_data_injection_in_timescale/config.conf')
 
     postgres_client_constants = config["Timescale Client"]
 
@@ -44,7 +44,7 @@ def connect_to_timescaledb_postgres_db():
 def connect_to_timescaledb_physio_signals_db():
 
     config = configparser.ConfigParser()
-    config.read('/opt/docker-data/tests/load_testing_python_scripts/manual_data_injection_in_timescale/config.conf')
+    config.read('/home/tests/load_testing_python_scripts/manual_data_injection_in_timescale/config.conf')
 
     postgres_client_constants = config["Timescale Client"]
 

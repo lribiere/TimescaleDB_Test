@@ -7,7 +7,7 @@ import logging
 
 
 logging.basicConfig(
-    filename='/opt/docker-data/tests/personal_logs/reading_logs_timescale.log',
+    filename='/home/tests/personal_logs/reading_logs_timescale.log',
     filemode='a',
     format='%(message)s',
     level=logging.INFO

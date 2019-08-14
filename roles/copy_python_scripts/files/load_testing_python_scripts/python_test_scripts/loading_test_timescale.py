@@ -7,7 +7,7 @@ import logging
 
 
 logging.basicConfig(
-    filename='/opt/docker-data/tests/personal_logs/injection_logs_timescale.log',
+    filename='/home/tests/personal_logs/injection_logs_timescale.log',
     filemode='a',
     format='%(message)s',
     level=logging.INFO
@@ -31,7 +31,7 @@ def get_number_output_motiongyroscope(cur):
 
 if __name__ == "__main__":
     config = configparser.ConfigParser()
-    config.read('/opt/docker-data/tests/load_testing_python_scripts/manual_data_injection_in_timescale/config.conf')
+    config.read('/home/tests/load_testing_python_scripts/manual_data_injection_in_timescale/config.conf')
 
     postgres_client_constants = config["Timescale Client"]
 
@@ -51,11 +51,11 @@ if __name__ == "__main__":
 
     for i in range(10):
 
-        os.system("sudo python3.6 /opt/docker-data/tests/load_testing_python_scripts/random_data_generator/source/random_data_generator.py -nbu 10 -hr 8")
+        os.system("sudo python3.6 /home/tests/load_testing_python_scripts/random_data_generator/source/random_data_generator.py -nbu 10 -hr 8")
 
         t1 = datetime.datetime.now()
 
-        os.system("sudo python3.6 /opt/docker-data/tests/load_testing_python_scripts/manual_data_injection_in_timescale/manual_data_injection.py --directory /opt/docker-data/data/aura_generated_data/ --chunk_size 1000")
+        os.system("sudo python3.6 /home/tests/load_testing_python_scripts/manual_data_injection_in_timescale/manual_data_injection.py --directory /home/data/aura_generated_data/ --chunk_size 1000")
 
         t2 = datetime.datetime.now()
 

@@ -9,7 +9,7 @@ MEASUREMENTS = ["RrInterval", "MotionAccelerometer", "MotionGyroscope"]
 
 def set_success_and_fail_directories(path_to_directories):
     config = configparser.ConfigParser()
-    config.read('/opt/docker-data/tests/load_testing_python_scripts/manual_data_injection_in_timescale/config.conf')
+    config.read('/home/tests/load_testing_python_scripts/manual_data_injection_in_timescale/config.conf')
 
     files_processing_paths = config["Paths"]
 

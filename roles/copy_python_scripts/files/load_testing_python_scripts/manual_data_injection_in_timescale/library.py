@@ -17,7 +17,7 @@ def change_timestamp(unused_1, unused_2):
 
 logging.Formatter.converter = change_timestamp
 logging.basicConfig(
-    filename='/opt/docker-data/logstash/personal_logs/timescaledb_manual_logs_input-json.log',
+    filename='/home/logstash/personal_logs/timescaledb_manual_logs_input-json.log',
     filemode='a',
     format='%(asctime)s.%(msecs)03d : %(message)s',
     level=logging.INFO,

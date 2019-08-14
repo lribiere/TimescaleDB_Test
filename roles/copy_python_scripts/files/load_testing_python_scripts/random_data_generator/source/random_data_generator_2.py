@@ -303,7 +303,7 @@ if __name__ == "__main__":
     args = vars(ap.parse_args())
 
     config = configparser.ConfigParser()
-    config.read('/opt/docker-data/tests/load_testing_python_scripts/random_data_generator/source/config.conf')
+    config.read('/home/tests/load_testing_python_scripts/random_data_generator/source/config.conf')
 
     files_processing_paths = config["Paths"]
     if os.path.exists(files_processing_paths["generated_files_directory"]):
